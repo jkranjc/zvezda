@@ -1,22 +1,22 @@
-/* UNICAST VIXE preko WIFI, ko ni unicasta, bere iz SD kartice 25ms
-NODEMCU plosca:
+/* UNICAST from VIXEN via  WIFI; when no unicast, then read from SD card (1 record/25ms)
+NODE MCU board:
 SD:
-- GND, 3.3V kar na plošo
-- CS na D4
-- MOSI na D7
-- SCK na D5
-- MISO na D6
+- GND, 3.3V from NODEMCU board
+- CS to D4
+- MOSI to D7
+- SCK to D5
+- MISO to D6
 
 LED WS2801: 
-- DATA na D1
-- SCK na D2
-- GND
-- posebej 5V inGND
+- DATA to D1
+- SCK to D2
+- GND from NODEMCU board
+- 5V and GND from power suply
 
 LED WS2811:
-- DATA na RX
-- GND
-- posebej 5V in GND
+- DATA to RX
+- GND to BODEMCU board
+- 5V and GND from power suply
 
 */
 
@@ -34,10 +34,8 @@ LED WS2811:
 #define CS_PIN  D4
 
 #ifndef STASSID
-//#define STASSID "JOZE_WIFI"
-//#define STAPSK  "englazvinamidej"
-#define STASSID "kranjc_wifi"
-#define STAPSK  "StefanaInBertolin"
+#define STASSID "wifissid"
+#define STAPSK  "password"
 #endif
 
 const int NUM_LEDS = 25;
@@ -116,6 +114,7 @@ void setup() {
     
 }
 
+// when no unicast
 void delajsam() {
   File dataFile = SD.open("output.bin");
 
